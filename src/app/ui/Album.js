@@ -1,10 +1,10 @@
 import Image from "next/image"
-export default function Artist( { artist } ){
-  console.log(artist)
+import Link from "next/link"
+
+export default function Album( { album } ){
   return (
-     <div className="Artist">
-      {/* row 1 */}
-            <tr>
+     
+            <tr className="Album">
               <th>
                 <label>
                   <input type="checkbox" className="checkbox" />
@@ -14,22 +14,22 @@ export default function Artist( { artist } ){
                 <div className="flex items-center space-x-3">
                   <div className="avatar">
                     <div className="mask mask-squircle w-12 h-12">
-                      <Image src={`${artist.images.length ? artist.images[0].url : ''}`} width={100} height={100} alt="Avatar Tailwind CSS Component" />
+                      <Image src={`${album.images.length ? album.images[0].url : ''}`} width={100} height={100} alt="Avatar Tailwind CSS Component" />
                     </div>
                   </div>
                   <div>
-                    <div className="font-bold">{artist.name}</div>
+                    <div className="font-bold">{album.name}</div>
                   </div>
                 </div>
               </td>
               <td>
-                {artist.name}
+                <Link href={`/search/album/${album.id}/detail`}>{album.name}</Link>
               </td>
               <td>AVG USER RATING</td>
               <th>
                 <button className="btn btn-ghost btn-xs">RATE</button>
               </th>
             </tr>
-   </div>
+   
   )
 }

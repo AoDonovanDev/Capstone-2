@@ -1,4 +1,9 @@
+'use client'
+import { usePathname } from "next/navigation"
+
 export default function Tabs({active, tab}){
+  const type  = usePathname();
+  console.log(type)
   return (
     <div className="Search">
       <a className={`tab tab-bordered ${active[0] ? 'tab-active': ''}`} onClick={()=>tab(0)}>Tracks</a> 

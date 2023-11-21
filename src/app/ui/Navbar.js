@@ -24,9 +24,10 @@ export default function Navbar({user, logOut, setLogin, setSignUp, setSearchResu
   async function search(formData){
     const {type, query} = formData;
     console.log(formData);
-    const response = await fetch(`http://127.0.0.1:3000/search/${type}/${query}`);
+    const response = await fetch(`http://127.0.0.1:3000/search/${type}/${query}`, {
+      cache: 'no-cache'
+    });
     const { searchResults } = await response.json();
-    console.log(searchResults)
     setSearchResults({...searchResults})
     
   }

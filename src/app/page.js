@@ -1,10 +1,9 @@
 "use client"
 import { useState } from "react"
-import Navbar from "./Navbar"
-import Login from "./Login"
-import SignUp from "./Signup"
-import SearchResults from "./SearchResults"
-import SoundrakeAPI from "./SoundrakeAPI"
+import Navbar from "./ui/Navbar"
+import Login from "./ui/Login"
+import SignUp from "./ui/Signup"
+import SearchResults from "./ui/SearchResults"
 
 
 
@@ -68,12 +67,11 @@ export default function Home() {
   
   return (
     <div className='Home'>
-      <SoundrakeAPI />
       <Navbar user={user} setLogin={setLogin} setSignUp={setSignUp} logOut={logOut} setSearchResults={setSearchResults} />
-      {pageState === 'login' ? <Login login={login} warnings={warnings}/> : <></>}
-      {pageState === 'signup' ? <SignUp register={register} /> : <></>}
-      {pageState === 'loggedIn' ? <h1>hi {user}</h1> : <></>}
-      <SearchResults searchResults={searchResults}/>
+      {pageState === 'login' && <Login login={login} warnings={warnings}/>}
+      {pageState === 'signup' && <SignUp register={register} />}
+      {user && <h1>hi {user}</h1>}
+      {user &&<SearchResults searchResults={searchResults}/>}
     </div>
   )
 }

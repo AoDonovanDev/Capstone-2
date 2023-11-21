@@ -19,9 +19,9 @@ export default function SearchResults( { searchResults } ){
           <thead>
           </thead>
           <tbody>
-            {tracks?.items.map((t,i) => <Track key={i} track={t} />)}
-            {artists ? artists.items.map((a,i) => <Artist key={i} artist={a} />) : <></> }
-            {albums ? albums.items.map((a, i) => <Album key={i} album={a}/>) : <></>}
+            {tracks?.items.map((t, i) => <Track key={i} track={t} />)}
+            {artists?.items.map((a, i) => <Artist key={i} artist={a} />)}
+            {albums?.items.map((a, i) => <Album key={i} album={a}/>)}
           </tbody>
           {/* foot */}
           <tfoot>
