@@ -77,7 +77,6 @@ export default function Layout({children}){
     <div>
       <userContext.Provider value={{userState, setUserState, player}}>
         <Navbar />
-       
         {children}
       </userContext.Provider>
     </div>
