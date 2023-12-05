@@ -1,4 +1,9 @@
+'use client';
+
 import Image from "next/image"
+import Link from "next/link"
+import LikeBtn from "./LikeBtn"
+
 export default function Artist( { artist } ){
 
   return (
@@ -6,14 +11,14 @@ export default function Artist( { artist } ){
             <tr className="Artist">
               <th>
                 <label>
-                  <input type="checkbox" className="checkbox" />
+                  <LikeBtn listItem={ artist }/>
                 </label>
               </th>
               <td>
                 <div className="flex items-center space-x-3">
                   <div className="avatar">
                     <div className="mask mask-squircle w-12 h-12">
-                      <Image src={`${artist.images.length ? artist.images[0].url : ''}`} width={100} height={100} alt="Avatar Tailwind CSS Component" />
+                      <Image src={`${artist.images.length ? artist.images[0].url : '/next.svg'}`} width={100} height={100} alt="Avatar Tailwind CSS Component" />
                     </div>
                   </div>
                   <div>
@@ -22,7 +27,7 @@ export default function Artist( { artist } ){
                 </div>
               </td>
               <td>
-                {artist.name}
+                <Link href={`/dashboard/artist/${artist.id}`}>{artist.name}</Link>
               </td>
               <td>AVG USER RATING</td>
               <th>

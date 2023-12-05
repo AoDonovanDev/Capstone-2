@@ -1,14 +1,20 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useContext } from "react"
 import './login.css'
+import { login } from "../lib/actions"
+import { useRouter } from "next/navigation"
 
-export default function Login({login, warnings}){
+export default function Login(){
+
+  const { replace } = useRouter();
 
   const [formData, setForm] = useState({
     username: '',
     password: ''
   })
+
+  const [warnings, setWarnings] = useState('')
 
 
   const handleChange = evt => {
@@ -19,7 +25,16 @@ export default function Login({login, warnings}){
     }));
   };
 
-  
+  async function submitLoginForm(formData){
+    const user = await login(formData);
+    if(user){
+      replace('/dashboard/search/track');
+    } else {
+      setWarnings('Login info does not match our records.')
+    }
+    
+  }
+
 
   return (
      <form className="Login">
@@ -45,7 +60,7 @@ export default function Login({login, warnings}){
         onChange={handleChange}
       />
 
-      <button type="button" className="btn btn-success" onClick={() => login(formData)}>Login</button>
+      <button type="button" className="btn btn-success" onClick={() => submitLoginForm(formData)}>Login</button>
     </form>
   )
 }

@@ -1,51 +1,31 @@
-import Tabs from "./Tabs"
-import SearchBar from "./SearchBar";
-import { useState } from "react"
+'use client'
+import Link from "next/link"
+import SearchBar from "./SearchBar"
+import { useContext } from "react"
+import { userContext } from "../userContext"
+import { logout } from "../lib/actions"
 
 
-export default function Navbar({user, logOut, setLogin, setSignUp, setSearchResults}){
 
-  const [active, setActive] = useState([0,1,0]);
 
-  function tab(i){
-    const copy = [...active];
-    const currentTabState = copy.map((t, idx) => t = idx===i ? 1 : 0 );
-    setActive(currentTabState);
-  }
+export default function Navbar(){
 
-  const select = active.indexOf(1)
-  //useRef maybe used here
-  const map = {
-    0: 'track',
-    1: 'artist',
-    2: 'album'
-  };
-
-  async function search(formData){
-    const {type, query} = formData;
-    console.log(formData);
-    const response = await fetch(`http://127.0.0.1:3000/search/${type}/${query}`, {
-      cache: 'no-cache'
-    });
-    const { searchResults } = await response.json();
-    setSearchResults({...searchResults})
-    
-  }
-
+  const { userState  } = useContext(userContext)
   return (
+  
     <div className="navbar bg-base-100">
         <div className="navbar-start">
           <a className="btn btn-ghost normal-case text-xl">Soundrake</a>
         </div>
         <div className="navbar-center"> 
-          {user ? <div><Tabs active={active} tab={tab}/> <SearchBar type={map[select]} search={search}/></div>: <></>}
+          {userState && <div> <SearchBar /></div>}
         </div> 
         <div className="navbar-end">
           <ul>
-          {user ? <button onClick={()=>logOut()}>logout</button> : 
+          {userState ? <button onClick={() => logout()} >logout</button> : 
           <div className="menu menu-horizontal px-1">
-            <li><button onClick={()=>setLogin()}>login</button></li>
-            <li><button onClick={() =>setSignUp()}>signup</button></li>
+            <li><Link href="/login">login</Link></li>
+            <li><Link href="/signup">signup</Link></li>
           </div>
           }
           </ul>

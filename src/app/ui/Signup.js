@@ -1,15 +1,18 @@
 "use client"
 import { useState } from "react"
 import './signup.css'
+import { register } from "../lib/actions"
+import { useRouter } from "next/navigation"
 
-export default function SignUp({register}){
+export default function SignUp(){
+
+  const { replace } = useRouter();
 
   const [formData, setForm] = useState({
     username: '',
     password: '',
     passwordB: '',
   })
-
 
   const handleChange = evt => {
     const { name, value } = evt.target;
@@ -19,6 +22,12 @@ export default function SignUp({register}){
     }));
   };
 
+  async function submitRegisterForm (formData) {
+    const user = await register(formData);
+    if(user){
+      replace('/dashboard/search/track')
+    }
+  }
   
 
   return (
@@ -54,7 +63,7 @@ export default function SignUp({register}){
         onChange={handleChange}
       />
 
-      <button type="button" className="btn btn-success" onClick={() => register(formData)}>SignUp</button>
+      <button type="button" className="btn btn-success" onClick={() => submitRegisterForm(formData)}>SignUp</button>
     </form>
   )
 }

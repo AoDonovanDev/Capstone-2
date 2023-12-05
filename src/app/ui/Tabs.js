@@ -1,14 +1,20 @@
 'use client'
-import { usePathname } from "next/navigation"
+import { usePathname, useParams, useRouter } from "next/navigation"
 
-export default function Tabs({active, tab}){
-  const type  = usePathname();
-  console.log(type)
+export default function Tabs(){
+  const searchType  = usePathname().split('/')[3];
+  const { replace } = useRouter();
+  console.log(searchType)
+
+  function tab(pathName){
+    replace(pathName);
+  }
+
   return (
     <div className="Search">
-      <a className={`tab tab-bordered ${active[0] ? 'tab-active': ''}`} onClick={()=>tab(0)}>Tracks</a> 
-      <a className= {`tab tab-bordered ${active[1] ? 'tab-active': ''}`} onClick={()=>tab(1)}>Artists</a> 
-      <a className={`tab tab-bordered ${active[2] ? 'tab-active': ''}`} onClick={()=>tab(2)}>Albums</a>
+      <li className={`tab tab-bordered ${searchType==='track' ? 'tab-active': ''}`} onClick={()=>tab('/dashboard/search/track')}>Tracks</li> 
+      <li className= {`tab tab-bordered ${searchType==='artist' ? 'tab-active': ''}`} onClick={()=>tab('/dashboard/search/artist')}>Artists</li> 
+      <li className={`tab tab-bordered ${searchType==='album' ? 'tab-active': ''}`} onClick={()=>tab('/dashboard/search/album')}>Albums</li>
     </div>
     
   )

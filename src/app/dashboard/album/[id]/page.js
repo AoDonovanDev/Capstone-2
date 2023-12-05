@@ -10,7 +10,7 @@ export default async function Page( { params } ){
   const [album, tracks] = await getAlbum(id);
   return (
     <>
-    <p>artist details go here</p>
+    <p>album details go here</p>
     <h1>{album.artists[0].name}</h1>
     <Image src={album.images[0].url} alt={`${album.name}`} width={album.images[0].width} height={album.images[0].width}/>
      <div className="overflow-x-auto">
