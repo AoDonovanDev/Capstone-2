@@ -1,13 +1,30 @@
+'use client'
+
 import { getArtist } from "@/app/lib/actions";
 import Album from "@/app/ui/Album";
 import Image from "next/image";
+import { userContext } from "@/app/userContext";
+import { useContext, useEffect, useState } from "react";
 
-export default async function Page( { params } ){
+export default function Page( { params } ){
   
   const { id } =  params;
+  const [pageData, setPageData] = useState('');
+  const { userState } = useContext(userContext);
   
+  console.log(userState)
 
-  const [artist, albums] = await getArtist(id);
+  useEffect(() => {
+    (async () => {
+      const [artist, albums] = await getArtist(id);
+      setPageData([artist, albums])
+    })();
+  }, [id]);
+ 
+  const [artist, albums] = pageData;
+
+  if(!pageData) return <></>;
+
   return (
     <>
     <p>artist details go here</p>

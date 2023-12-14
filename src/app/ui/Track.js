@@ -6,28 +6,31 @@ import LikeBtn from "./LikeBtn";
 import { playTrack } from "../lib/actions";
 import { useContext } from "react";
 import { userContext } from "../userContext";
+import RatingModal from "./RatingModal";
 
 
 export default function Track({track}){
-  const { userState, player } = useContext(userContext)
+  const { userState, player, token } = useContext(userContext)
   
   async function togglePlay(access_token, sp_id){
     const state = await player.getCurrentState();
+    const current = state.track_window.current_track.id;
     console.log(state);
-    if(state.paused){
+    if(state.paused && current === sp_id){
       playTrack(access_token, sp_id, state.position);
+    } else if(current !== sp_id) {
+      playTrack(access_token, sp_id);
     } else {
       player.togglePlay();
     }
   }
-
   return (
             <tr className='Track'>
               <th>
                 <label>
                   <LikeBtn listItem={track}/>
                 </label>
-              <button className="btn btn-success" onClick={()=>togglePlay(userState.access_token, track.id)}>Play</button>
+              {token && <button className="btn btn-success" onClick={()=>togglePlay(token, track.id)}>Play</button>}
               </th>
               <td>
                 <div className="flex items-center space-x-3">
@@ -46,7 +49,7 @@ export default function Track({track}){
               </td>
               <td>AVG USER RATING</td>
               <th>
-                <button className="btn btn-ghost btn-xs">RATE</button>
+                <RatingModal />
               </th>
             </tr>
    

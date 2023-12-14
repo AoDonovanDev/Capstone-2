@@ -193,8 +193,40 @@ export async function transferPlayback(access_token, device_id){
     },
     body: JSON.stringify(device_data)
   })
+  console.log(response)
 }
 
+export async function getUserStarred(token){
+  const plResponse = await fetch('https://api.spotify.com/v1/me/playlists', {
+    cache: 'no-cache',
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json"
+    }
+  });
+  const userPlaylists = await plResponse.json();
+  const starred = userPlaylists.items.find((p) => p.name === 'Starred');
+  const plHref = starred.tracks.href;
+  const trResponse = await fetch(plHref, {
+    cache: 'no-cache',
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json"
+    }
+  })
+  const tracks = await trResponse.json();
+  const starredIds = tracks.items.map(t => t.track.external_ids.isrc);
+  let likesMap = {};
+  for(let id of starredIds){
+    likesMap[id] = id;
+  }
+  return likesMap;
+}
+
+export async function submitRating(prevState, formData){
+  console.log(formData)
+  return { message: 'form data logged' };
+}
 
 
 

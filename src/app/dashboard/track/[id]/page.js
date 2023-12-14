@@ -1,5 +1,6 @@
 import SearchResults from "@/app/ui/SearchResults";
 import { getTrack } from "@/app/lib/actions";
+import StarRating from "@/app/ui/StarRating";
 
 export default async function Page( { params } ){
   const { id } = params;
@@ -7,6 +8,7 @@ export default async function Page( { params } ){
   return (
     <>
     <SearchResults searchResults={{track}}/>
+    <StarRating />
     </>
   )
 }

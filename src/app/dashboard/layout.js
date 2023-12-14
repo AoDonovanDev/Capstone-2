@@ -1,10 +1,9 @@
 'use client';
 import Navbar from "../ui/Navbar";
 import { userContext } from "../userContext";
-import { getUserLikes, getToken } from "../lib/actions";
+import { getUserLikes, getToken, getUserStarred } from "../lib/actions";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import Player from "../ui/Player";
 import usePlayer from "../hooks/usePlayer";
 import { transferPlayback } from "../lib/actions";
 
@@ -33,6 +32,8 @@ export default function Layout({children}){
         setToken(access_token)
       } else {
         var { likesMap } = currentUser;
+        console.log(likesMap)
+
       }
       setUserState({...currentUser, likesMap});
       })();
@@ -40,7 +41,6 @@ export default function Layout({children}){
 
   useEffect( () => {
     if(!token) return;
-
     (async () => {
       const script = document.createElement("script");
       script.src = "https://sdk.scdn.co/spotify-player.js";
@@ -58,14 +58,14 @@ export default function Layout({children}){
       player.addListener('ready', async({ device_id }) => {
       console.log('Ready with Device ID', device_id);
       await transferPlayback(token, device_id)
+      const likesMap = await getUserStarred(token);
+      setUserState({sp: 'sp', likesMap})
+      setPlayer(player);
       });
 
       player.addListener('not_ready', ({ device_id }) => {
       console.log('Device ID has gone offline', device_id);
       })
-      console.log('token before connect', token)
-      setPlayer(player);
-      console.log(player)
       player.connect();
   };
   })()
@@ -75,7 +75,7 @@ export default function Layout({children}){
   
   return (
     <div>
-      <userContext.Provider value={{userState, setUserState, player}}>
+      <userContext.Provider value={{userState, setUserState, player, token}}>
         <Navbar />
         {children}
       </userContext.Provider>
