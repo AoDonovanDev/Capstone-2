@@ -1,7 +1,7 @@
 'use client';
 import Navbar from "../ui/Navbar";
 import { userContext } from "../userContext";
-import { getUserLikes, getToken, getUserStarred } from "../lib/actions";
+import { getUserInfo, getToken, getUserStarred } from "../lib/actions";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import usePlayer from "../hooks/usePlayer";
@@ -19,8 +19,7 @@ export default function Layout({children}){
 
   useEffect( () => {
     (async function(){
-      console.log('user set useEffect')
-      let currentUser = await getUserLikes();
+      let currentUser = await getUserInfo();
       const token = await getToken();
 
       if(!currentUser && !token) return;
@@ -32,7 +31,6 @@ export default function Layout({children}){
         setToken(access_token)
       } else {
         var { likesMap } = currentUser;
-        console.log(likesMap)
 
       }
       setUserState({...currentUser, likesMap});

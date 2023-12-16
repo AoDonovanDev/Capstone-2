@@ -48,8 +48,8 @@ export async function login(formData){
     },
     body: JSON.stringify(formData)
   })
-  const {user, token, likes} = await result.json();
-  console.log('user, likes in login action', user, likes)
+  const {user, token, likes, ratings} = await result.json();
+  console.log('user, likes in login action', user, likes, ratings)
   if(user){
     cookies().set({
       name: "SoundrakeSession",
@@ -81,7 +81,7 @@ export async function register(formData){
   };
 };
 
-export async function getUserLikes(){
+export async function getUserInfo(){
   const user = cookies().get('SoundrakeSession');
   if(!user) return;
 
@@ -96,9 +96,9 @@ export async function getUserLikes(){
     body: JSON.stringify({token: value})
     })
 
-  const { likesMap } = await response.json();
+  const { likesMap, ratingsMap } = await response.json();
   if(user){
-    return {user, likesMap};
+    return {user, likesMap, ratingsMap};
   }
 };
 
@@ -224,8 +224,28 @@ export async function getUserStarred(token){
 }
 
 export async function submitRating(prevState, formData){
-  console.log(formData)
-  return { message: 'form data logged' };
+  console.log("preeeeev state", prevState, "form Daterr", formData)
+  const token = prevState.token
+  const response = await fetch('http://127.0.0.1:3000/ratings/add', {
+    cach: 'no-cache',
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      token,
+      starRating: formData.get('starRating'),
+      comments: formData.get('comments'),
+      sp_id: formData.get('sp_id')
+     })
+  })
+  const { rating } = await response.json();
+  console.log(rating)
+  return { 
+    ...prevState,
+    message: 'rating updated',
+    rating
+ };
 }
 
 
