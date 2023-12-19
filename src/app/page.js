@@ -8,7 +8,7 @@ export default function Page() {
     <div className='Home'>
       <p>root page</p>
       <Navbar />
-      <button className="btn btn-error" onClick={()=>spotifyAuthReq()}>log in with spotify</button>
+      {/* <button className="btn btn-error" onClick={()=>spotifyAuthReq()}>log in with spotify</button> */}
     </div>
  
   )

@@ -6,16 +6,17 @@ import LikeBtn from "./LikeBtn";
 import { playTrack } from "../lib/actions";
 import { useContext } from "react";
 import { userContext } from "../userContext";
+import { itemContext } from "../itemContext";
 import RatingModal from "./RatingModal";
 
 
-export default function Track({track}){
-  const { userState, player, token } = useContext(userContext)
+export default function Track(){
+  const { userState, player, token } = useContext(userContext);
+  const track = useContext(itemContext);
   
   async function togglePlay(access_token, sp_id){
     const state = await player.getCurrentState();
     const current = state.track_window.current_track.id;
-    console.log(state);
     if(state.paused && current === sp_id){
       playTrack(access_token, sp_id, state.position);
     } else if(current !== sp_id) {

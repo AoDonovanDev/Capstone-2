@@ -3,8 +3,14 @@
 import Image from "next/image"
 import Link from "next/link"
 import LikeBtn from "./LikeBtn"
+import RatingModal from "./RatingModal";
+import { useContext } from "react";
+import { itemContext } from "../itemContext";
 
-export default function Album( { album } ){
+export default function Album(){
+
+  const album = useContext(itemContext);
+
   return (
      
             <tr className="Album">
@@ -30,7 +36,7 @@ export default function Album( { album } ){
               </td>
               <td>AVG USER RATING</td>
               <th>
-                <button className="btn btn-ghost btn-xs">RATE</button>
+                <RatingModal />
               </th>
             </tr>
    

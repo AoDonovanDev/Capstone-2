@@ -1,7 +1,6 @@
 'use server'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation';
-import { Jwt } from 'jsonwebtoken';
 
 export async function getArtist(id){
     const response = await fetch(`http://127.0.0.1:3000/artist/${id}`, {
@@ -39,7 +38,6 @@ export async function search(searchType, query){
 };
 
 export async function login(formData){
-  console.log('in login action', formData)
   const result = await fetch('http://127.0.0.1:3000/auth/signin', {
     cache: 'no-cache',
     method: "POST",
@@ -49,7 +47,6 @@ export async function login(formData){
     body: JSON.stringify(formData)
   })
   const {user, token, likes, ratings} = await result.json();
-  console.log('user, likes in login action', user, likes, ratings)
   if(user){
     cookies().set({
       name: "SoundrakeSession",
@@ -224,10 +221,9 @@ export async function getUserStarred(token){
 }
 
 export async function submitRating(prevState, formData){
-  console.log("preeeeev state", prevState, "form Daterr", formData)
   const token = prevState.token
   const response = await fetch('http://127.0.0.1:3000/ratings/add', {
-    cach: 'no-cache',
+    cache: 'no-cache',
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
@@ -240,10 +236,32 @@ export async function submitRating(prevState, formData){
      })
   })
   const { rating } = await response.json();
-  console.log(rating)
   return { 
     ...prevState,
-    message: 'rating updated',
+    message: 'rating created',
+    rating
+ };
+}
+
+export async function updateRating(prevState, formData){
+  const token = prevState.token;
+  const response = await fetch('http://127.0.0.1:3000/ratings/update', {
+    cache: 'no-cache',
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      token,
+      starRating: formData.get('starRating'),
+      comments: formData.get('comments'),
+      sp_id: formData.get('sp_id')
+    })
+  });
+  const { rating } = await response.json();
+  return { 
+    ...prevState,
+    message: 'rating created',
     rating
  };
 }

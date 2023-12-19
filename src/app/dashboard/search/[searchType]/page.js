@@ -12,13 +12,14 @@ export default async function Page({ params, searchParams }){
 
   const { searchType } = params;
   
-  const searchResults = await search (searchType, query)
+  const { track, tracks, artists, albums} = await search (searchType, query);
+  const searchResults = track || tracks || artists || albums;
 
 
   return (
     <>
     <h1>search {searchType}</h1>
-    <SearchResults searchResults={searchResults}/>
+    <SearchResults searchResults={searchResults} searchType={searchType}/>
     </>
   )
 }

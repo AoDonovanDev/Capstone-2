@@ -4,6 +4,7 @@ import { getArtist } from "@/app/lib/actions";
 import Album from "@/app/ui/Album";
 import Image from "next/image";
 import { userContext } from "@/app/userContext";
+import { itemContext } from "@/app/itemContext";
 import { useContext, useEffect, useState } from "react";
 
 export default function Page( { params } ){
@@ -36,7 +37,7 @@ export default function Page( { params } ){
           <thead>
           </thead>
           <tbody>
-            {albums?.items.map((a, i) => <Album key={i} album={a}/>)}
+            {albums?.items.map((a, i) => <itemContext.Provider key={i} value={a}><Album album={a}/></itemContext.Provider>)}
           </tbody>
           {/* foot */}
           <tfoot>
