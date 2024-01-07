@@ -1,5 +1,5 @@
 'use client'
-import { usePathname, useParams, useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 
 export default function Tabs(){
   const searchType  = usePathname().split('/')[3];

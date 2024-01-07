@@ -1,6 +1,5 @@
 "use client"
 import { spotifyAuthReq } from './lib/actions';
-import Navbar from "./ui/Navbar"
 import Link from 'next/link';
 
 

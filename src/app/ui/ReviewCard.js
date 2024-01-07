@@ -1,6 +1,5 @@
 import Image from "next/image"
 import Stars from "./Stars"
-import RatingModal from "./RatingModal"
 import Link from "next/link"
 
 export default function ReviewCard({name, img_url, starRating, comments, id}){
