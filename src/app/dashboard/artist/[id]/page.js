@@ -28,9 +28,10 @@ export default function Page( { params } ){
 
   return (
     <>
-    <p>artist details go here</p>
-    <h1>{artist.name}</h1>
-    <Image src={artist.images[0].url} alt={`${artist.name}`} width={artist.images[0].width} height={artist.images[0].width}/>
+    <div className="flex flex-col items-center">
+      <h1>{artist.name}</h1>
+      <Image src={artist.images[0].url} alt={`${artist.name}`} width={artist.images[0].width} height={artist.images[0].width}/>
+    </div>
      <div className="overflow-x-auto">
         <table className="table">
           {/* head */}

@@ -28,7 +28,7 @@ export default function Login(){
   async function submitLoginForm(formData){
     const user = await login(formData);
     if(user){
-      replace('/dashboard/search/track');
+      replace('/dashboard');
     } else {
       setWarnings('Login info does not match our records.')
     }
@@ -38,9 +38,8 @@ export default function Login(){
 
   return (
      <form className="Login">
-      <h3>Login</h3>
       <p>{warnings}</p>
-      <label htmlFor="username">Username</label>
+      <label htmlFor="username" >Username</label>
       <input
         id="username"
         name="username"
@@ -60,7 +59,7 @@ export default function Login(){
         onChange={handleChange}
       />
 
-      <button type="button" className="btn btn-success" onClick={() => submitLoginForm(formData)}>Login</button>
+      <button type="button" className="btn btn-success self-end" onClick={() => submitLoginForm(formData)}>Login</button>
     </form>
   )
 }

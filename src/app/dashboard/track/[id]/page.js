@@ -1,15 +1,39 @@
-import SearchResults from "@/app/ui/SearchResults";
+'use client';
+
+import { itemContext } from "@/app/itemContext";
 import { getTrack } from "@/app/lib/actions";
-import StarRating from "@/app/ui/StarRating";
+import { useState, useEffect } from "react";
 import Track from "@/app/ui/Track";
 
-export default async function Page( { params } ){
+export default function Page( { params } ){
+
+  const [track, setTrack] = useState('')
   const { id } = params;
-  const track = await getTrack(id)
-  console.log('track in track page', track)
+
+  useEffect(() => {
+    (async () => {
+      const track = await getTrack(id)
+      setTrack(track)
+    })()
+  }, [id])
+  
+  if(!track) return <></>
+
   return (
-    <>
-    <SearchResults searchResults={{track}}/>
-    </>
+    <itemContext.Provider value={track}>
+      <div className="SearchResults">
+        <div className="overflow-x-auto">
+          <table className="table">
+            <thead>
+            </thead>
+            <tbody>
+              <Track/>
+            </tbody>
+            <tfoot>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </itemContext.Provider>
   )
 }

@@ -4,6 +4,7 @@ import SearchBar from "./SearchBar"
 import { useContext } from "react"
 import { userContext } from "../userContext"
 import { logout } from "../lib/actions"
+import { useParams } from "next/navigation"
 
 
 
@@ -11,14 +12,17 @@ import { logout } from "../lib/actions"
 export default function Navbar(){
 
   const { userState  } = useContext(userContext)
+  const params = useParams()
+
   return (
   
     <div className="navbar bg-base-100">
         <div className="navbar-start">
-          <a className="btn btn-ghost normal-case text-xl">Soundrake</a>
+          <Link className="btn btn-ghost normal-case text-xl" href="/dashboard">Soundrake</Link>
         </div>
         <div className="navbar-center"> 
-          {userState && <div> <SearchBar /></div>}
+          {userState && params.searchType && <div> <SearchBar /></div>}
+          {!params.searchType && <Link href="/dashboard/search/track">Search</Link>}
         </div> 
         <div className="navbar-end">
           <ul>

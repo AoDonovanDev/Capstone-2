@@ -4,14 +4,16 @@ import Image from "next/image"
 import Link from "next/link"
 import LikeBtn from "./LikeBtn";
 import { playTrack } from "../lib/actions";
-import { useContext } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { userContext } from "../userContext";
 import { itemContext } from "../itemContext";
+import { getAverage } from "../lib/actions";
 import RatingModal from "./RatingModal";
 
 
 export default function Track(){
   const { userState, player, token } = useContext(userContext);
+  const [rating, setRating] = useState('')
   const track = useContext(itemContext);
   
   async function togglePlay(access_token, sp_id){
@@ -25,6 +27,12 @@ export default function Track(){
       player.togglePlay();
     }
   }
+  useEffect(() => {
+    (async () => {
+      const avg = await getAverage(track.id);
+      setRating(avg);
+    })();
+  }, [track.id])
 
   return (
     <tr className='Track'>
@@ -49,7 +57,7 @@ export default function Track(){
       <td>
         <Link href={`/dashboard/artist/${track.artists[0].id}`}>{track.artists[0].name}</Link>
       </td>
-      <td>AVG USER RATING</td>
+      <td>AVERAGE RATING: {rating}</td>
       <th>
         <RatingModal />
       </th>

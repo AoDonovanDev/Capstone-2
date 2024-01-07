@@ -12,7 +12,6 @@ export default function SearchBar(){
 
   const { replace } = useRouter();
   const { searchType } = params;
- 
 
   function handleChange(term){
     const params = new URLSearchParams(searchParams)
@@ -21,6 +20,7 @@ export default function SearchBar(){
     } else {
       params.delete('query');
     }
+    params.delete('page');
     replace(`${pathName}?${params.toString()}`)
   };
 

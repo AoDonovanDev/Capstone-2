@@ -21,5 +21,6 @@ export default async function Page({ params, searchParams }){
     <h1>search {searchType}</h1>
     <SearchResults searchResults={searchResults} searchType={searchType}/>
     </>
+    
   )
 }

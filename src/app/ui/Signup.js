@@ -25,14 +25,13 @@ export default function SignUp(){
   async function submitRegisterForm (formData) {
     const user = await register(formData);
     if(user){
-      replace('/dashboard/search/track')
+      replace('/dashboard')
     }
   }
   
 
   return (
      <form className="SignUp">
-      <h3>Sign Up</h3>
       <label htmlFor="username">Username</label>
       <input
         id="username"
@@ -63,7 +62,7 @@ export default function SignUp(){
         onChange={handleChange}
       />
 
-      <button type="button" className="btn btn-success" onClick={() => submitRegisterForm(formData)}>SignUp</button>
+      <button type="button" className="btn btn-success self-end" onClick={() => submitRegisterForm(formData)}>SignUp</button>
     </form>
   )
 }

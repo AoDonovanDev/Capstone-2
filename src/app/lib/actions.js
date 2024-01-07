@@ -1,4 +1,5 @@
 'use server'
+import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation';
 
@@ -232,7 +233,9 @@ export async function submitRating(prevState, formData){
       token,
       starRating: formData.get('starRating'),
       comments: formData.get('comments'),
-      sp_id: formData.get('sp_id')
+      sp_id: formData.get('sp_id'),
+      img_url: formData.get('img_url'),
+      name: formData.get('name')
      })
   })
   const { rating } = await response.json();
@@ -258,14 +261,28 @@ export async function updateRating(prevState, formData){
       sp_id: formData.get('sp_id')
     })
   });
+  console.log('starRating val in updateRating action', formData.get('starRating'))
   const { rating } = await response.json();
+  if(prevState.detail){
+    revalidatePath("/dashboard")
+    redirect("/dashboard")
+  }
   return { 
     ...prevState,
-    message: 'rating created',
+    message: 'rating updated',
     rating
  };
 }
 
-
+export async function getAverage(sp_id){
+  const response = await fetch(`http://127.0.0.1:3000/ratings/average/${sp_id}`, {
+    cache: 'no-cache',
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+  const { average } = await response.json();
+  return average;
+}
 
 
