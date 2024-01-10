@@ -49,7 +49,7 @@ export default function ReviewDetail(){
                     name="comments" 
                     defaultValue={review.comments} />  
         </div>
-        <RatingSubmitBtn modal={false} state={state} sp_id={id} userState={userState} setUserState={setUserState}/>
+        <RatingSubmitBtn modal={false} state={state} sp_id={id} userState={userState}/>
       </form>
     </div>
   )

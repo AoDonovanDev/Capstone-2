@@ -9,5 +9,6 @@ export async function GET(request){
     name: 'code',
     value: code
   })
+  console.log('auth call back', code)
   redirect('/dashboard/search/track');
 }

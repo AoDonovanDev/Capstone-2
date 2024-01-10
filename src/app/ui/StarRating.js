@@ -37,7 +37,7 @@ export default function StarRating( { existing } ) {
     setRating(-1);
   }
 
-  const images = item.images || item.album.images;
+  const images = item.images || item.album?.images;
   return (
     <div className="StarRatingForm">
       <div className="flex">
@@ -50,7 +50,7 @@ export default function StarRating( { existing } ) {
         <input type="number" value={rating} hidden={true} name="starRating" readOnly={true} max={5}/>
         <input type="text" value={item.id} hidden={true} name="sp_id" readOnly={true}/>
         <input type="text" value={item.name} hidden={true} name="name" readOnly={true}/>
-        {images.length && <input type="text" value={item.images ? item.images[0].url : item.album.images[0].url} hidden={true} name="img_url" readOnly={true}/>}
+        {(images && images.length) ? <input type="text" value={images[0].url} hidden={true} name="img_url" readOnly={true}/> : <></>}
         <h1>{item.name} {item.artists && `by ${item.artists[0].name}`}</h1>
         <div className="flex flex-row">
           <textarea className="textarea textarea-secondary grow" 
@@ -59,7 +59,7 @@ export default function StarRating( { existing } ) {
                     defaultValue={existing?.comments} />  
         </div>
         <div className="modal-action">
-          <RatingSubmitBtn modal={true} state={state} sp_id={item.id} userState={userState} setUserState={setUserState}/>
+          <RatingSubmitBtn modal={true} state={state} sp_id={item.id} userState={userState} />
           <button type="button" className="btn" onClick={()=>document.getElementById(item.id).close()}>Close</button>
         </div>
       </form>

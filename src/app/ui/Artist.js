@@ -3,13 +3,16 @@
 import Image from "next/image"
 import Link from "next/link"
 import LikeBtn from "./LikeBtn"
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { itemContext } from "../itemContext";
+import { setStateContext } from "../setStateContext";
 import RatingModal from "./RatingModal";
 
 export default function Artist(){
 
   const artist = useContext(itemContext);
+  const [avgRating, setAvgRating] = useState(artist.avg);
+
 
   return (
     <tr className="Artist">
@@ -33,9 +36,11 @@ export default function Artist(){
       <td>
           <Link href={`/dashboard/artist/${artist.id}`}>{artist.name}</Link>
       </td>
-      <td>AVG USER RATING</td>
+      <td>AVG USER RATING: {avgRating}</td>
       <th>
-        <RatingModal />
+        <setStateContext.Provider value={setAvgRating}>
+          <RatingModal />
+        </setStateContext.Provider>
       </th>
     </tr>
   )

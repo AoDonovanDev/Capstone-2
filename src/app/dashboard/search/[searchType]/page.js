@@ -1,3 +1,4 @@
+'use server';
 
 import SearchResults from "@/app/ui/SearchResults";
 import { search } from "@/app/lib/actions";
@@ -18,7 +19,6 @@ export default async function Page({ params, searchParams }){
 
   return (
     <>
-    <h1>search {searchType}</h1>
     <SearchResults searchResults={searchResults} searchType={searchType}/>
     </>
     

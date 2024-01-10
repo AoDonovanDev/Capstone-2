@@ -20,7 +20,9 @@ export async function getAlbum(id){
 }
 
 export async function getTrack(id){
-  const response = await fetch(`http://127.0.0.1:3000/track/${id}`)
+  const response = await fetch(`http://127.0.0.1:3000/track/${id}`, {
+    cache: 'no-cache'
+  })
   const { searchResults } = await response.json();
   return searchResults;
 }

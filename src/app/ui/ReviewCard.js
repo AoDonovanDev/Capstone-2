@@ -8,7 +8,7 @@ export default function ReviewCard({name, img_url, starRating, comments, id}){
       {img_url && <figure><Image src={img_url} alt={`${name}`} height={200} width={400}/></figure>}
       <div className="card-body">
         <h2 className="card-title">{name}</h2>
-        <div class="flex flex-row justify-start">
+        <div className="flex flex-row justify-start">
           <Stars rating={starRating}/>
         </div>
         <p>{comments}</p>

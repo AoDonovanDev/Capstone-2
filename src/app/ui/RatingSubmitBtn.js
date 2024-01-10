@@ -1,9 +1,14 @@
  'use client';
  import { experimental_useFormStatus as useFormStatus } from 'react-dom';
+ import { getAverage } from "../lib/actions";
+ import { setStateContext } from '../setStateContext';
+ import { useContext } from 'react';
+
 
  
- export default function SubmitBtn( { modal, userState, setUserState, state, sp_id } ){
+ export default function RatingSubmitBtn( { modal, userState, state, sp_id } ){
     const { pending, data } = useFormStatus();
+    const setAvgRating = useContext(setStateContext)
 
     if(pending) {
       const comments = data.get('comments');
@@ -15,10 +20,14 @@
         starRating,
         sp_id,
         img_url,
-        name
+        name,
       }
-      setTimeout(()=> {
-        setUserState({...userState})
+  
+      setTimeout(async()=> {
+        if(!modal) return;
+        const avg = await getAverage(sp_id);
+        document.getElementById(sp_id).close();
+        setAvgRating(avg)
       }, 10)
     
     }

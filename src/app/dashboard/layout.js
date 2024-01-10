@@ -57,6 +57,7 @@ export default function Layout({children}){
       console.log('Ready with Device ID', device_id);
       await transferPlayback(token, device_id)
       const likesMap = await getUserStarred(token);
+      console.log(player)
       setUserState({sp: 'sp', likesMap})
       setPlayer(player);
       });
@@ -73,7 +74,7 @@ export default function Layout({children}){
   
   return (
     <div>
-      <userContext.Provider value={{userState, setUserState, player, token}}>
+      <userContext.Provider value={{userState, setUserState, player, setPlayer, token}}>
         <Navbar />
         {children}
       </userContext.Provider>

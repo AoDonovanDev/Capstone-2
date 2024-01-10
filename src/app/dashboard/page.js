@@ -4,15 +4,17 @@ import { useContext, useState } from "react";
 import { userContext } from "../userContext";
 import ReviewCard from "../ui/ReviewCard"
 import { v4 as uuidv4 } from 'uuid';
+import { spotifyAuthReq } from '../lib/actions';
 
 export default function Page(){
-  const { userState } = useContext(userContext);
-  console.log(userState)
+  const { userState, setPlayer } = useContext(userContext);
   const map = userState.ratingsMap;
+  const likes = userState.likesMap;
   const keys = userState ? Object.keys(map) : []
 
   return (
     <div>
+      {/* <button className="btn btn-success" onClick={()=>spotifyAuthReq()}>enable spotify player (requires spotify premium account)</button>  */}
       <div className="collapse bg-base-200">
         <input type="checkbox" name="my-accordion-1" className="w-1/12"/> 
         <div className="collapse-title text-xl font-medium">
@@ -22,7 +24,7 @@ export default function Page(){
           {keys.length && keys.map( r => <ReviewCard key={uuidv4()} img_url={map[r].img_url} starRating={map[r].starRating} comments={map[r].comments} name={map[r].name} id={r}/>)}
         </div>
       </div>
-      <div className="collapse bg-base-200">
+      {/* <div className="collapse bg-base-200">
         <input type="checkbox" name="my-accordion-1" /> 
         <div className="collapse-title text-xl font-medium">
             <h1>My Likes</h1>
@@ -30,7 +32,7 @@ export default function Page(){
         <div className="collapse-content"> 
           <p>hello</p>
         </div>
-      </div>
+      </div> */}
     </div>
 
   )

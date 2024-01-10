@@ -6,6 +6,7 @@ import Image from "next/image";
 import { userContext } from "@/app/userContext";
 import { itemContext } from "@/app/itemContext";
 import { useContext, useEffect, useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Page( { params } ){
   
@@ -13,7 +14,6 @@ export default function Page( { params } ){
   const [pageData, setPageData] = useState('');
   const { userState } = useContext(userContext);
   
-  console.log(userState)
 
   useEffect(() => {
     (async () => {
@@ -30,7 +30,7 @@ export default function Page( { params } ){
     <>
     <div className="flex flex-col items-center">
       <h1>{artist.name}</h1>
-      <Image src={artist.images[0].url} alt={`${artist.name}`} width={artist.images[0].width} height={artist.images[0].width}/>
+      {artist.images.length ? <Image src={artist.images[0].url} alt={`${artist.name}`} width={artist.images[0].width} height={artist.images[0].width}/> : <></>}
     </div>
      <div className="overflow-x-auto">
         <table className="table">
@@ -38,7 +38,7 @@ export default function Page( { params } ){
           <thead>
           </thead>
           <tbody>
-            {albums?.items.map((a, i) => <itemContext.Provider key={i} value={a}><Album album={a}/></itemContext.Provider>)}
+            {albums?.items.map((a, i) => <itemContext.Provider key={uuidv4()} value={a}><Album album={a}/></itemContext.Provider>)}
           </tbody>
           {/* foot */}
           <tfoot>

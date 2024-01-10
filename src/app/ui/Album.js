@@ -4,12 +4,16 @@ import Image from "next/image"
 import Link from "next/link"
 import LikeBtn from "./LikeBtn"
 import RatingModal from "./RatingModal";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { itemContext } from "../itemContext";
+import { setStateContext } from "../setStateContext";
+
 
 export default function Album(){
 
   const album = useContext(itemContext);
+  const [avgRating, setAvgRating] = useState(album.avg)
+  console.log(album, avgRating)
 
   return (
      
@@ -34,9 +38,11 @@ export default function Album(){
               <td>
                 <Link href={`/dashboard/album/${album.id}`}>{album.name}</Link>
               </td>
-              <td>AVG USER RATING</td>
+              <td>AVG USER RATING: {avgRating}</td>
               <th>
-                <RatingModal />
+                <setStateContext.Provider value={setAvgRating}>
+                  <RatingModal />
+                </setStateContext.Provider>
               </th>
             </tr>
    
