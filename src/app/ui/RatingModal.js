@@ -9,7 +9,7 @@ export default function RatingModal(){
 
   const item = useContext(itemContext);
   const { userState } = useContext(userContext)
-  const existing = userState?.ratingsMap[item.id]
+  const existing = userState?.ratingsMap?.[item.id]
 
 
   return (

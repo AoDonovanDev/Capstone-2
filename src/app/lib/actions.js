@@ -34,7 +34,6 @@ export async function search(searchType, query){
       cache: 'no-cache'
     });
     const { searchResults } = await response.json();
-    console.log('search results in search action', searchResults)
     return searchResults;
   } catch(err){
     console.log('err', err)
@@ -194,7 +193,6 @@ export async function transferPlayback(access_token, device_id){
     },
     body: JSON.stringify(device_data)
   })
-  console.log(response)
 }
 
 export async function getUserStarred(token){

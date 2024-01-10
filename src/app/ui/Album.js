@@ -13,7 +13,6 @@ export default function Album(){
 
   const album = useContext(itemContext);
   const [avgRating, setAvgRating] = useState(album.avg)
-  console.log(album, avgRating)
 
   return (
      

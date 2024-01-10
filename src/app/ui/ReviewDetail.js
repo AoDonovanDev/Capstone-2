@@ -12,7 +12,7 @@ import RatingSubmitBtn from "./RatingSubmitBtn"
 
 export default function ReviewDetail(){
 
-  const { userState, setUserState } = useContext(userContext);
+  const { userState } = useContext(userContext);
   const { ratingsMap } = userState;
   const { id } = useParams();
   const review = ratingsMap[id];
@@ -28,11 +28,9 @@ export default function ReviewDetail(){
   const [state, formAction] = useFormState(updateRating, initialState);
 
   function clickHandler(r){
-    console.log('in rating clicker', r)
     setRating(r+1)
   }
 
-  console.log(review, ratingsMap)
   return (
     <div className="ReviewDetail flex flex-col items-center">
       <Image alt={review.name} src={review.img_url} width={200} height={200} className="w-full h-auto lg:w-1/3 lg:h-1/3"/>

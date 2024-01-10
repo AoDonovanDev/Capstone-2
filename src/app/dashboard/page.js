@@ -4,7 +4,6 @@ import { useContext, useState } from "react";
 import { userContext } from "../userContext";
 import ReviewCard from "../ui/ReviewCard"
 import { v4 as uuidv4 } from 'uuid';
-import { spotifyAuthReq } from '../lib/actions';
 
 export default function Page(){
   const { userState, setPlayer } = useContext(userContext);
@@ -14,7 +13,6 @@ export default function Page(){
 
   return (
     <div>
-      {/* <button className="btn btn-success" onClick={()=>spotifyAuthReq()}>enable spotify player (requires spotify premium account)</button>  */}
       <div className="collapse bg-base-200">
         <input type="checkbox" name="my-accordion-1" className="w-1/12"/> 
         <div className="collapse-title text-xl font-medium">

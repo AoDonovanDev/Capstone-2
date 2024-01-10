@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 import usePlayer from "../hooks/usePlayer";
 import { transferPlayback } from "../lib/actions";
+import { spotifyAuthReq } from '../lib/actions';
 
 
 
@@ -21,19 +22,16 @@ export default function Layout({children}){
     (async function(){
       let currentUser = await getUserInfo();
       const token = await getToken();
-
       if(!currentUser && !token) return;
 
-      if(!currentUser){
+      if(token){
         const { access_token, refresh_token } = token;
-        currentUser = {access_token, refresh_token}
-        var likesMap = [];
+        currentUser = {...currentUser, access_token, refresh_token};
         setToken(access_token)
+        setUserState({...currentUser});
       } else {
-        var { likesMap } = currentUser;
-
+        setUserState({...currentUser})
       }
-      setUserState({...currentUser, likesMap});
       })();
   }, [])
 
@@ -58,7 +56,7 @@ export default function Layout({children}){
       await transferPlayback(token, device_id)
       const likesMap = await getUserStarred(token);
       console.log(player)
-      setUserState({sp: 'sp', likesMap})
+      /* setUserState({sp: 'sp', likesMap}) */
       setPlayer(player);
       });
 

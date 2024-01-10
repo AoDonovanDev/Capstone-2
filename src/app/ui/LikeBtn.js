@@ -8,7 +8,7 @@ import { addLike, removeLike } from "../lib/actions";
 
 export default function LikeBtn( {listItem} ){
 
-  const { userState, setUserState, token } = useContext(userContext);
+  const { userState, setUserState } = useContext(userContext);
 
   const { user, likesMap } = userState;
 
@@ -26,10 +26,9 @@ export default function LikeBtn( {listItem} ){
     setUserState(newState)
   }
   
-  const like_id = token ? listItem.external_ids?.isrc : listItem.id;
   return (
-    <button className="btn btn-ghost" onClick={() => updateLikes(user?.value, like_id)}>
-      <Image src={likesMap?.[like_id] ? "/headphonesShiny.png" : "/headphonesBlack.png"} alt="headphones" height={40} width={40}/>
+    <button className="btn btn-ghost" onClick={() => updateLikes(user?.value, listItem.id)}>
+      <Image src={likesMap?.[listItem.id] ? "/headphonesShiny.png" : "/headphonesBlack.png"} alt="headphones" height={40} width={40}/>
     </button>
   )
 }

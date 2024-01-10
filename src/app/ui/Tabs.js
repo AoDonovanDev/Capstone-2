@@ -4,7 +4,6 @@ import { usePathname, useRouter } from "next/navigation"
 export default function Tabs(){
   const searchType  = usePathname().split('/')[3];
   const { replace } = useRouter();
-  console.log(searchType)
 
   function tab(pathName){
     replace(pathName);

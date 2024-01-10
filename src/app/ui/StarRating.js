@@ -16,10 +16,10 @@ export default function StarRating( { existing } ) {
   
   const [rating, setRating] = useState(existing?.starRating ?? -1);
 
-
+  console.log('userState in starRating component', userState)
   const initialState = {
     message: null,
-    token: userState.user.value,
+    token: userState?.user.value,
     sp_id: item.id,
     rating: existing
   };
@@ -29,7 +29,6 @@ export default function StarRating( { existing } ) {
   const [state, formAction] = useFormState(ratingAction, initialState);
 
   function clickHandler(r){
-    console.log('form button action', ratingAction, existing)
     setRating(r+1);
   }
 
