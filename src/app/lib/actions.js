@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation';
 
 export async function getArtist(id){
-    const response = await fetch(`http://127.0.0.1:3000/artist/${id}`, {
+    const response = await fetch(`${process.env.BASE_URL}/artist/${id}`, {
       cache: 'no-cache'
     });
     const { searchResults } = await response.json();
@@ -12,7 +12,7 @@ export async function getArtist(id){
 }
 
 export async function getAlbum(id){
-    const response = await fetch(`http://127.0.0.1:3000/album/${id}`, {
+    const response = await fetch(`${process.env.BASE_URL}/album/${id}`, {
       cache: 'no-cache'
     });
     const { searchResults } = await response.json();
@@ -20,7 +20,7 @@ export async function getAlbum(id){
 }
 
 export async function getTrack(id){
-  const response = await fetch(`http://127.0.0.1:3000/track/${id}`, {
+  const response = await fetch(`${process.env.BASE_URL}/track/${id}`, {
     cache: 'no-cache'
   })
   const { searchResults } = await response.json();
@@ -30,18 +30,19 @@ export async function getTrack(id){
 export async function search(searchType, query){
   if(!searchType || !query) return {};
   try{
-    const response = await fetch(`http://127.0.0.1:3000/search/${searchType}/${query}`, {
+    const response = await fetch(`${process.env.BASE_URL}/search/${searchType}/${query}`, {
       cache: 'no-cache'
     });
     const { searchResults } = await response.json();
+    console.log('search results in search action', searchResults)
     return searchResults;
   } catch(err){
-    console.log(err)
+    console.log('err', err)
   };
 };
 
 export async function login(formData){
-  const result = await fetch('http://127.0.0.1:3000/auth/signin', {
+  const result = await fetch(`${process.env.BASE_URL}/auth/signin`, {
     cache: 'no-cache',
     method: "POST",
     headers: {
@@ -63,7 +64,7 @@ export async function login(formData){
 };
 
 export async function register(formData){
-  const result = await fetch('http://127.0.0.1:3000/auth/new', {
+  const result = await fetch(`${process.env.BASE_URL}/auth/new`, {
     cache: 'no-cache',
     method: "POST",
     headers: {
@@ -87,7 +88,7 @@ export async function getUserInfo(){
 
   const { value } = user;
 
-  const response = await fetch('http://127.0.0.1:3000/likes/getUserLikes', {
+  const response = await fetch(`${process.env.BASE_URL}/likes/getUserLikes`, {
     cache: 'no-cache',
     method: "POST",
     headers: {
@@ -108,7 +109,7 @@ export async function logout(){
 };
 
 export async function addLike(token, sp_id){
-  const like = await fetch('http://127.0.0.1:3000/likes/add', {
+  const like = await fetch(`${process.env.BASE_URL}/likes/add`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -118,7 +119,7 @@ export async function addLike(token, sp_id){
 };
 
 export async function removeLike(token, sp_id){
-  const like = await fetch('http://127.0.0.1:3000/likes/remove', {
+  const like = await fetch(`${process.env.BASE_URL}/likes/remove`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -128,7 +129,7 @@ export async function removeLike(token, sp_id){
 };
 
 export async function spotifyAuthReq(){
-  const response = await fetch('http://127.0.0.1:3000/auth/spotify', {
+  const response = await fetch(`${process.env.BASE_URL}/auth/spotify`, {
     cache: 'no-cache'
   });
   const { oauth_url } = await response.json();
@@ -139,7 +140,7 @@ export async function getToken(){
   const cookie = cookies().get('code');
   if(!cookie) return;
   const { value } = cookie;
-  const response = await fetch('http://127.0.0.1:3000/auth/token', {
+  const response = await fetch(`${process.env.BASE_URL}/auth/token`, {
     cache: 'no-cache',
     method: 'POST',
     headers: {
@@ -225,7 +226,7 @@ export async function getUserStarred(token){
 
 export async function submitRating(prevState, formData){
   const token = prevState.token
-  const response = await fetch('http://127.0.0.1:3000/ratings/add', {
+  const response = await fetch(`${process.env.BASE_URL}/ratings/add`, {
     cache: 'no-cache',
     method: 'POST',
     headers: {
@@ -250,7 +251,7 @@ export async function submitRating(prevState, formData){
 
 export async function updateRating(prevState, formData){
   const token = prevState.token;
-  const response = await fetch('http://127.0.0.1:3000/ratings/update', {
+  const response = await fetch(`${process.env.BASE_URL}/ratings/update`, {
     cache: 'no-cache',
     method: 'POST',
     headers: {
@@ -263,7 +264,6 @@ export async function updateRating(prevState, formData){
       sp_id: formData.get('sp_id')
     })
   });
-  console.log('starRating val in updateRating action', formData.get('starRating'))
   const { rating } = await response.json();
   if(prevState.detail){
     revalidatePath("/dashboard")
@@ -277,7 +277,7 @@ export async function updateRating(prevState, formData){
 }
 
 export async function getAverage(sp_id){
-  const response = await fetch(`http://127.0.0.1:3000/ratings/average/${sp_id}`, {
+  const response = await fetch(`${process.env.BASE_URL}/ratings/average/${sp_id}`, {
     cache: 'no-cache',
     headers: {
       "Content-Type": "application/json"
