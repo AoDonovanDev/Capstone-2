@@ -196,6 +196,7 @@ export async function transferPlayback(access_token, device_id){
 }
 
 export async function getUserStarred(token){
+  //this is not currently used anywhere in the app
   const plResponse = await fetch('https://api.spotify.com/v1/me/playlists', {
     cache: 'no-cache',
     headers: {

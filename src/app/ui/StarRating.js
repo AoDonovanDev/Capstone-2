@@ -16,7 +16,6 @@ export default function StarRating( { existing } ) {
   
   const [rating, setRating] = useState(existing?.starRating ?? -1);
 
-  console.log('userState in starRating component', userState)
   const initialState = {
     message: null,
     token: userState?.user.value,

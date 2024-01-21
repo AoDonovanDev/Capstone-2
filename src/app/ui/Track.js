@@ -17,6 +17,7 @@ export default function Track(){
   const [avgRating, setAvgRating] = useState(track.avg) 
   
   async function togglePlay(access_token, sp_id){
+    console.log(token, player)
     const state = await player.getCurrentState();
     const current = state.track_window.current_track.id;
     if(state.paused && current === sp_id){

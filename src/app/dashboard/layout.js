@@ -38,11 +38,13 @@ export default function Layout({children}){
   useEffect( () => {
     if(!token) return;
     (async () => {
+      console.log('token found, running player init')
       const script = document.createElement("script");
       script.src = "https://sdk.scdn.co/spotify-player.js";
       script.async = true;
 
       document.body.appendChild(script);
+      try{
       globalThis.onSpotifyWebPlaybackSDKReady = () => {
         
         
@@ -53,10 +55,8 @@ export default function Layout({children}){
       
       player.addListener('ready', async({ device_id }) => {
       console.log('Ready with Device ID', device_id);
-      await transferPlayback(token, device_id)
-      const likesMap = await getUserStarred(token);
+      await transferPlayback(token, device_id);
       console.log(player)
-      /* setUserState({sp: 'sp', likesMap}) */
       setPlayer(player);
       });
 
@@ -64,7 +64,11 @@ export default function Layout({children}){
       console.log('Device ID has gone offline', device_id);
       })
       player.connect();
-  };
+      
+      }
+      }catch(e){
+        console.log('the player failed to load', e)
+    }
   })()
 }, [token, setPlayer])
 

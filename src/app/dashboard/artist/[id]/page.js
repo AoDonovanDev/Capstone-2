@@ -3,16 +3,14 @@
 import { getArtist } from "@/app/lib/actions";
 import Album from "@/app/ui/Album";
 import Image from "next/image";
-import { userContext } from "@/app/userContext";
 import { itemContext } from "@/app/itemContext";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 export default function Page( { params } ){
   
   const { id } =  params;
   const [pageData, setPageData] = useState('');
-  const { userState } = useContext(userContext);
   
 
   useEffect(() => {
