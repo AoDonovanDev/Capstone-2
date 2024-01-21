@@ -1,6 +1,6 @@
-﻿# Capstone-2
+﻿# Soundrake
 
-## Soundrake is a Next.js app that allows users to search Spotify to like, rate, and review music. 
+## a Next.js app that allows users to search Spotify to like, rate, and review music. 
 
 
 Full Stack used:  
