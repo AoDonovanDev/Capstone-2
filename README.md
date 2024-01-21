@@ -1,6 +1,6 @@
 ﻿# Soundrake
 
-## a Next.js app that allows users to search Spotify to like, rate, and review music. 
+### Rate and review music. Listen to your favorite tracks and discover new tunes.
 
 
 Full Stack used:  
