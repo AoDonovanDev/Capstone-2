@@ -16,7 +16,10 @@ Features:
   -Like, rate, and/or review any track, artist, or album  
   -Reviews are aggregated to show an average user score  
   -'Reviews' tab on your dashboard presents all of your reviews along with an 'Update' button if you want to change star rating or add some thoughts.  
+  
+Planned Feature:  
   -If you have a Spotify premium account, you are also able to play tracks by clicking the 'Enable Player' button.  
+  This app is in development mode and access to this feature is currently limited. A request has been made to extend this feature to all users with Spotify, and is currently under review.
 
 
 I felt these were the most important features to communicate the idea of the project.
