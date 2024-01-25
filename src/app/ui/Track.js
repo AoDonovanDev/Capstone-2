@@ -30,22 +30,22 @@ export default function Track(){
   }
 
   return (
-    <tr className='Track'>
+    <tr className='Track h-1/12'>
       <th>
         <label>
           <LikeBtn listItem={track}/>
         </label>
       {token && <button className="btn btn-success" onClick={()=>togglePlay(token, track.id)}>Play</button>}
       </th>
-      <td>
-        <div className="flex items-center space-x-3">
+      <td className="md:flex">
+        <div className="flex items-center space-x-3 ">
           <div className="avatar">
             <div className="mask mask-squircle w-12 h-12">
-              {track.album && <Image src={`${track.album.images[0].url}`} width={100} height={100} alt="Avatar Tailwind CSS Component" />}
+              {track.album && <Image src={`${track.album.images[0].url}`} width={100} height={100} alt="track artist photoa" />}
             </div>
           </div>
-          <div>
-            <Link href={`/dashboard/track/${track.id}`}><div className="font-bold">{track.name}</div></Link>
+          <div className="h-12 w-24 overflow-scroll overscroll-contain md:overflow-hidden md:h-auto md:w-auto">
+            <Link href={`/dashboard/track/${track.id}`} className="font-bold">{track.name}</Link>
           </div>
         </div>
       </td>

@@ -83,7 +83,7 @@ export async function register(formData){
 
 export async function getUserInfo(){
   const user = cookies().get('SoundrakeSession');
-  if(!user) return;
+  if(!user) redirect('/')
 
   const { value } = user;
 

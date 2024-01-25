@@ -6,24 +6,23 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 import usePlayer from "../hooks/usePlayer";
 import { transferPlayback } from "../lib/actions";
-import { spotifyAuthReq } from '../lib/actions';
+
 
 
 
 
 export default function Layout({children}){
 
-  const user = useContext(userContext)
+  const user = useContext(userContext);
   const [userState, setUserState] = useState(user);
-  const [token, setToken] = useState('')
-  const [player, setPlayer] = usePlayer()
+  const [token, setToken] = useState('');
+  const [player, setPlayer] = usePlayer();
 
   useEffect( () => {
     (async function(){
       let currentUser = await getUserInfo();
       const token = await getToken();
       if(!currentUser && !token) return;
-
       if(token){
         const { access_token, refresh_token } = token;
         currentUser = {...currentUser, access_token, refresh_token};
@@ -77,8 +76,8 @@ export default function Layout({children}){
   return (
     <div>
       <userContext.Provider value={{userState, setUserState, player, setPlayer, token}}>
-        <Navbar />
-        {children}
+          <Navbar />
+          {children}
       </userContext.Provider>
     </div>
   )

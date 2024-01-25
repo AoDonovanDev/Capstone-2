@@ -22,15 +22,6 @@ export default function Page(){
           {keys.length && keys.map( r => <ReviewCard key={uuidv4()} img_url={map[r].img_url} starRating={map[r].starRating} comments={map[r].comments} name={map[r].name} id={r}/>)}
         </div>
       </div>
-      {/* <div className="collapse bg-base-200">
-        <input type="checkbox" name="my-accordion-1" /> 
-        <div className="collapse-title text-xl font-medium">
-            <h1>My Likes</h1>
-        </div>
-        <div className="collapse-content"> 
-          <p>hello</p>
-        </div>
-      </div> */}
     </div>
 
   )

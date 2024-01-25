@@ -64,7 +64,7 @@ export default function SearchResults( {searchResults, searchType} ){
   return (
     <div className="SearchResults h-full">
       <div className="overflow-x-auto">
-        <table className="table">
+        <table className="table m-0">
           <thead>
           </thead>
           {userState &&
