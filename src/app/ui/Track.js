@@ -41,7 +41,7 @@ export default function Track(){
         <div className="flex items-center space-x-3 ">
           <div className="avatar">
             <div className="mask mask-squircle w-12 h-12">
-              {track.album && <Image src={`${track.album.images[0].url}`} width={100} height={100} alt="track artist photoa" />}
+              {track.album && <Image src={`${track.album.images[0].url}`} width={100} height={100} alt="track artist photo" />}
             </div>
           </div>
           <div className="h-12 w-24 overflow-scroll overscroll-contain md:overflow-hidden md:h-auto md:w-auto">
