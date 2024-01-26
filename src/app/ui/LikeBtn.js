@@ -28,7 +28,7 @@ export default function LikeBtn( {listItem} ){
   
   return (
     <button className="btn btn-ghost" onClick={() => updateLikes(user?.value, listItem.id)}>
-      <Image src={likesMap?.[listItem.id] ? "/headphonesShiny.png" : "/headphonesBlack.png"} alt="headphones" height={40} width={40}/>
+      <Image src={likesMap?.[listItem.id] ? "/headphonesShiny.png" : "/headphonesBlack.png"} alt="headphones" height={40} width={40} className="min-w-max"/>
     </button>
   )
 }
