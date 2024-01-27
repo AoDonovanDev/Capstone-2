@@ -69,7 +69,6 @@ export default function SearchResults( {searchResults, searchType} ){
           </thead>
           {userState &&
           <tbody>
-
             {searchResults?.items.slice(pageIndex[0], pageIndex[1]).map(item => {
               const searchTypeMap = {
                 'track': <Track />,
@@ -81,7 +80,6 @@ export default function SearchResults( {searchResults, searchType} ){
             )}
           </tbody>
           }
-          
           <tfoot>
           </tfoot>
         </table>

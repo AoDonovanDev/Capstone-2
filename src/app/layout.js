@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'SoundRake',
-  description: '',
+  description: 'SoundRake',
 }
 
 
