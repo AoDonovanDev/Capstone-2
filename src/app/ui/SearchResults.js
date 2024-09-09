@@ -6,6 +6,7 @@ import Album from "./Album"
 import { useContext, useState, useEffect } from "react";
 import { userContext } from "../userContext";
 import { itemContext } from "../itemContext";
+import { setStateContext } from "../setStateContext";
 import { v4 as uuidv4 } from 'uuid';
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
 
@@ -17,6 +18,10 @@ export default function SearchResults( {searchResults, searchType} ){
   const { replace } = useRouter();
   const pathName = usePathname();
   const page = searchParams.get('page')
+  const [localPlaybackState, setLocalPlaybackState] = useState({
+    isPlaying: false,
+    currentTrack: null
+  })
   
   useEffect(() => {
     if(!page){
@@ -71,7 +76,7 @@ export default function SearchResults( {searchResults, searchType} ){
           <tbody>
             {searchResults?.items.slice(pageIndex[0], pageIndex[1]).map(item => {
               const searchTypeMap = {
-                'track': <Track />,
+                'track': <setStateContext.Provider value={[localPlaybackState, setLocalPlaybackState]}><Track /></setStateContext.Provider>,
                 'artist': <Artist />,
                 'album': <Album />
                 }

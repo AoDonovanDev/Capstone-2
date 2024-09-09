@@ -37,12 +37,7 @@ You can also start this repo in a local environment if you wish.
 
 
 
-**PLEASE NOTE**  
-The backend API is running on a free tier Render instance, and as such spins down with inactivity.  
-If logging in or signing up does not appear to be working, simply wait 2 minutes and try again.  
-In this case, your original request restarted the API and you will be able to use it shortly.  
-Of course this is not ideal, but it is a personal project and it doesn't make sense to spend any additional money on it at this time.
-Future versions may be upgraded to paid tier instance to eliminate this issue. TBD.  
+🎉 Backend API now has 100% up time 🥳
 You can view the backend API here -> https://github.com/AoDonovanDev/Capstone-2-be  
 Spotify Web Api docs -> https://developer.spotify.com/documentation/web-api  
 
