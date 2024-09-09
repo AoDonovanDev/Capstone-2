@@ -14,7 +14,7 @@ export default function Page(){
   return (
     <div>
       <div className="collapse bg-base-200">
-        <input type="checkbox" name="my-accordion-1" className="w-1/12"/> 
+        <input type="checkbox" name="my-accordion-1" className="w-1/12" defaultChecked/> 
         <div className="collapse-title text-xl font-medium">
             <h1>My Reviews</h1>
         </div>
