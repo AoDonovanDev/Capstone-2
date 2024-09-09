@@ -2,6 +2,7 @@
 
 ### Rate and review music. Listen to your favorite tracks and discover new tunes.
 ## Soundrake is live @ https://soundrake-fe.vercel.app/  
+Feel free to take the app for a spin with username: testuser, password: password. Or sign up and create your own profile!
 
 
 Full Stack used:  
